@@ -32,8 +32,20 @@ class Quiz:
         print("Quiz completed!")
         print(f"Your score: {self.score}/{len(self.questions)}")
 
+def select_difficulty():
+    while True:
+        print("Select difficulty level:")
+        print("1. Easy")
+        print("2. Medium")
+        print("3. Hard")
+        choice = input("Enter your choice (1, 2, or 3): ")
+        if choice in ["1", "2", "3"]:
+            return int(choice)
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
+
 # Define your questions here
-questions = [
+easy_questions = [
     Question("What does CPU stand for?",
              ["Central Processing Unit", "Computer Personal Unit", "Central Personal Unit", "Central Processor Unit"],
              "a"),
@@ -42,7 +54,10 @@ questions = [
              "a"),
     Question("What does HTML stand for?",
              ["Hyper Text Markup Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language", "Hyperlink Transfer Markup Language"],
-             "a"),
+             "a")
+]
+
+medium_questions = [
     Question("What is the purpose of a GPU?",
              ["Central Processing Unit", "Random Access Memory", "Graphics Processing Unit", "Hard Disk Drive"],
              "c"),
@@ -51,17 +66,33 @@ questions = [
              "c"),
     Question("What is the name of the largest computer network in the world?",
              ["Internet", "Intranet", "LAN", "WAN"],
-             "a"),
+             "a")
+]
+
+hard_questions = [
     Question("Which company developed the Python programming language?",
              ["Google", "Microsoft", "Apple", "Dropbox"],
              "a"),
     Question("What is the function of an operating system?",
              ["Manage hardware resources", "Design websites", "Create documents", "Play games"],
+             "a"),
+    Question("What is the process of finding errors and fixing them within a program called?",
+             ["Debugging", "Programming", "Compiling", "Running"],
              "a")
 ]
 
-# Create a quiz object
-quiz = Quiz(questions)
+# Main program
+def main():
+    difficulty = select_difficulty()
+    if difficulty == 1:
+        questions = easy_questions
+    elif difficulty == 2:
+        questions = medium_questions
+    else:
+        questions = hard_questions
 
-# Run the quiz
-quiz.run_quiz()
+    quiz = Quiz(questions)
+    quiz.run_quiz()
+
+if __name__ == "__main__":
+    main()
